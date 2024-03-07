@@ -1,6 +1,22 @@
+import axios from "axios";
+import { useState } from "react";
+import User from "./User";
+
 const App = () => {
+  const [users, setUsers] = useState([]);
+
+  async function addNewUser() {
+    const res = await axios.get("https://randomuser.me/api/?lego");
+    let data = res.data.results[0];
+    const image = data.picture.thumbnail;
+    const name = `${data.name.first} ${data.name.last}`;
+    const location = `${data.location.city}, ${data.location.state}`;
+
+    setUsers([...users, { image: image, name: name, location: location }]);
+  }
+
   return (
-    <div className="h-screen bg-slate-800 text-gray-200 p-5 ">
+    <div className="h-screen bg-zinc-800 text-gray-200 p-5 ">
       <div className="w-full max-w-[500px] m-auto">
         <div className="">
           <input
@@ -8,10 +24,15 @@ const App = () => {
             type="text"
             placeholder="Search users..."
           />
-          <p className="mt-6 text-sm text-slate-500">
+          <p className="mt-6 text-sm text-zinc-500">
             To add a new user, click the button below
           </p>
-          <button className="w-full mt-block bg-[#4FA825] hover:bg-[#3c811d] duration-200 text-white px-3 py-2 rounded-md mt-1">
+          <button
+            onClick={() => {
+              addNewUser();
+            }}
+            className="w-full mt-block bg-[#2b8fe1] hover:bg-[#166db4] duration-200 text-white px-3 py-2 rounded-md mt-1"
+          >
             Add a New User
           </button>
         </div>
@@ -19,33 +40,20 @@ const App = () => {
         {/* users */}
         <div className="mt-10">
           <h3>Lego People in our Toy Box</h3>
-          <ul className="user-list p-5 bg-slate-700 mt-2 rounded-md">
-            <li className="flex place-items-center mb-3 last-of-type:mb-0">
-              <img
-                className="size-[60px] mr-4 rounded-full"
-                src="https://placehold.co/500x500"
-              />
-              <div>
-                <p>FirstName LastName</p>
-                <p className="text-slate-400 text-sm">Location</p>
-              </div>
-              <button className="ml-auto bg-[#4FA825] px-3 py-2 rounded-md hover:bg-[#3c811d] duration-200">
-                Delete
-              </button>
-            </li>
-            <li className="flex place-items-center mb-3 last-of-type:mb-0">
-              <img
-                className="size-[60px] mr-4 rounded-full"
-                src="https://placehold.co/500x500"
-              />
-              <div>
-                <p>FirstName LastName</p>
-                <p className="text-slate-400 text-sm">Location</p>
-              </div>
-              <button className="ml-auto bg-[#4FA825] px-3 py-2 rounded-md hover:bg-[#3c811d] duration-200">
-                Delete
-              </button>
-            </li>
+          <ul className="user-list p-5 bg-zinc-700 mt-2 rounded-md">
+            {users.map((user, index) => {
+              return (
+                <User
+                  users={users}
+                  setUsers={setUsers}
+                  id={index}
+                  key={index}
+                  image={user.image}
+                  name={user.name}
+                  location={user.location}
+                />
+              );
+            })}
           </ul>
         </div>
       </div>
