@@ -1,9 +1,11 @@
 import axios from "axios";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import User from "./User";
 
 const App = () => {
   const [users, setUsers] = useState([]);
+  const [inputVal, setInputVal] = useState("");
+  const searchQuery = useRef("");
 
   async function addNewUser() {
     const res = await axios.get("https://randomuser.me/api/?lego");
@@ -12,7 +14,18 @@ const App = () => {
     const name = `${data.name.first} ${data.name.last}`;
     const location = `${data.location.city}, ${data.location.state}`;
 
-    setUsers([...users, { image: image, name: name, location: location }]);
+    setUsers([
+      ...users,
+      { image: image, name: name, location: location, isVisible: true },
+    ]);
+  }
+
+  function searchUsers() {
+    users.map((user) => {
+      user.isVisible = user.name
+        .toLowerCase()
+        .includes(searchQuery.current.toLowerCase());
+    });
   }
 
   return (
@@ -20,9 +33,15 @@ const App = () => {
       <div className="w-full max-w-[500px] m-auto">
         <div className="">
           <input
-            className="w-full px-3 py-2 rounded-md"
+            onChange={(e) => {
+              setInputVal(e.target.value);
+              searchQuery.current = e.target.value;
+              searchUsers();
+            }}
+            className="w-full px-3 py-2 rounded-md text-zinc-700"
             type="text"
             placeholder="Search users..."
+            value={inputVal}
           />
           <p className="mt-6 text-sm text-zinc-500">
             To add a new user, click the button below
@@ -44,6 +63,7 @@ const App = () => {
             {users.map((user, index) => {
               return (
                 <User
+                  isVisible={user.isVisible}
                   users={users}
                   setUsers={setUsers}
                   id={index}

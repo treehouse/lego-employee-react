@@ -1,12 +1,16 @@
 const User = (props) => {
-  const { users, setUsers, image, name, location, id } = props;
+  const { isVisible, users, setUsers, image, name, location, id } = props;
 
   function deleteUser(userID) {
     setUsers(users.filter((user, index) => index !== userID));
   }
 
   return (
-    <li className="flex place-items-center mb-3 last-of-type:mb-0">
+    <li
+      className={`${
+        !isVisible ? "hidden" : "flex"
+      } place-items-center mb-3 last-of-type:mb-0`}
+    >
       <img className="size-[60px] mr-4 rounded-full" src={image} />
       <div>
         <p>{name}</p>
