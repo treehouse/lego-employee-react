@@ -60,20 +60,24 @@ const App = () => {
         <div className="mt-10">
           <h3>Lego People in our Toy Box</h3>
           <ul className="user-list p-5 bg-zinc-700 mt-2 rounded-md">
-            {users.map((user, index) => {
-              return (
-                <User
-                  isVisible={user.isVisible}
-                  users={users}
-                  setUsers={setUsers}
-                  id={index}
-                  key={index}
-                  image={user.image}
-                  name={user.name}
-                  location={user.location}
-                />
-              );
-            })}
+            {/* limit the users.length to 7, 
+                map in those users */}
+            { 
+              users.slice(0, 8).map((user, index) => {
+                return (
+                  <User
+                    isVisible={user.isVisible}
+                    users={users}
+                    setUsers={setUsers}
+                    id={index}
+                    key={index}
+                    image={user.image}
+                    name={user.name}
+                    location={user.location}
+                  />
+                );
+              })
+            }
           </ul>
         </div>
       </div>
