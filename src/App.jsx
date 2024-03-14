@@ -2,6 +2,7 @@ import axios from "axios";
 import { useRef, useState, useEffect } from "react";
 import User from "./User";
 import Pagination from "./Pagination";
+import './styles.css';
 
 const App = () => {
   const [users, setUsers] = useState([]);
@@ -43,87 +44,109 @@ const App = () => {
   }
 
   return (
-    <div className="h-screen bg-zinc-800 text-gray-200 p-5 ">
-      <div className="w-full max-w-[500px] m-auto">
-        <div className="">
-          <input
-            onChange={(e) => {
-              setInputVal(e.target.value);
-              searchQuery.current = e.target.value;
-              searchUsers();
-            }}
-            className="w-full px-3 py-2 rounded-md text-zinc-700"
-            type="text"
-            placeholder="Search users..."
-            value={inputVal}
-          />
-          <p className="mt-6 text-sm text-zinc-500">
-            To add a new user, click the button below
-          </p>
-          <button
-            onClick={() => {
-              addNewUser();
-            }}
-            className="w-full mt-block bg-[#2b8fe1] hover:bg-[#166db4] duration-200 text-white px-3 py-2 rounded-md mt-1"
-          >
-            Add a New User
-          </button>
-        </div>
+    <div>
 
-        {/* users */}
-        <div className="mt-10">
-          <h3>Lego People in our Toy Box</h3>
-          <ul className="user-list p-5 bg-zinc-700 mt-2 rounded-md">
-            {
-              /**
-               * We use .slice() to select a subset of the users array to display
-               * @param {number} startIndex - initially 0, then updated by pagination button clicks
-               * @param {number} endIndex - calculated by startIndex + usersPerPage
-              */
-              users.slice(startIndex, endIndex).map((user, index) => {
-                return (
-                  <User
-                    isVisible={user.isVisible}
-                    users={users}
-                    setUsers={setUsers}
-                    id={index}
-                    key={index}
-                    image={user.image}
-                    name={user.name}
-                    location={user.location}
-                  />
-                );
-              })
-            }
-          </ul>
-        </div>
+      <header className="bg-[#D9D9D9]">
+        <h1 className="header1">Toy Box Enterprise<sup>®</sup></h1>
+        <h2 className="header2">Welcome to the Toy Box employee database</h2>
+      </header>
 
-        {/* paginate */}
-        <div>
-          <ul className="flex place-content-center gap-3">
-            {
-              /**
-               * We use Array.from() to create an array of length numBtns
-               * We then map over this array to create the pagination buttons
-               */
-              users.length > 0 ? (
-                Array.from({ length: numBtns }, (_, i) => {
-                  const pageNum = i + 1;
+      <div className="employees">
+        <div className="w-full max-w-[500px] m-auto mt-5">
+
+          <div className="employee-sec">
+            <div className="page-title">
+              <h3 className="header3">Employees</h3>
+              <h4 className="header4">View all current employees</h4>
+            </div>
+            <div className="main-button">
+              <button
+                onClick={() => {
+                  addNewUser();
+                }}
+                className="add-employee"
+              >
+                Add New Employee
+              </button>
+            </div>
+          </div>
+
+          <div className="">
+            <input
+              onChange={(e) => {
+                setInputVal(e.target.value);
+                searchQuery.current = e.target.value;
+                searchUsers();
+              }}
+              className="search-employees"
+              type="text"
+              placeholder="Search by name..."
+              value={inputVal}
+            />
+            {/* <p className="mt-6 text-sm text-zinc-500">
+              To add a new user, click the button below
+            </p> */}
+          </div>
+
+          {/* users */}
+          <div className="employee-list">
+            <h4 className="header4">Showing results: <span className="results">1 of 1</span></h4>
+            <ul className="employee-items user-list">
+              {
+                /**
+                 * We use .slice() to select a subset of the users array to display
+                 * @param {number} startIndex - initially 0, then updated by pagination button clicks
+                 * @param {number} endIndex - calculated by startIndex + usersPerPage
+                */
+                users.slice(startIndex, endIndex).map((user, index) => {
                   return (
-                    <Pagination
-                      key={i}
-                      pageNum={pageNum}
-                      isActive={pageNum === activePage}
-                      updateActivePage={() => setActivePage(pageNum)}
-                      updateStartIndex={() => setStartIndex((pageNum - 1) * usersPerPage)}
+                    <User
+                      isVisible={user.isVisible}
+                      users={users}
+                      setUsers={setUsers}
+                      id={index}
+                      key={index}
+                      image={user.image}
+                      name={user.name}
+                      location={user.location}
                     />
-                  )
+                  );
                 })
-              ) : null
-            }
-          </ul>
+              }
+            </ul>
+          </div>
+
+          {/* paginate */}
+          <div>
+            <ul className="flex place-content-center gap-3">
+              {
+                /**
+                 * We use Array.from() to create an array of length numBtns
+                 * We then map over this array to create the pagination buttons
+                 */
+                users.length > 0 ? (
+                  Array.from({ length: numBtns }, (_, i) => {
+                    const pageNum = i + 1;
+                    return (
+                      <Pagination
+                        key={i}
+                        pageNum={pageNum}
+                        isActive={pageNum === activePage}
+                        updateActivePage={() => setActivePage(pageNum)}
+                        updateStartIndex={() => setStartIndex((pageNum - 1) * usersPerPage)}
+                      />
+                    )
+                  })
+                ) : null
+              }
+            </ul>
+          </div>
         </div>
       </div>
+
+      <footer>
+        <h4 className="header4">© 2024 Toy Box Enterprise. All rights reserved.</h4>
+      </footer>
     </div>
   );
 };

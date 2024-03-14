@@ -1,0 +1,145 @@
+* {
+    font-family: 'Oswald', sans-serif;
+}
+
+
+header {
+    padding: 60px 10px;
+    text-align: center;
+}
+
+.header1 {
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.header2 {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #009344;
+}
+
+.employees {
+    min-height: calc(100vh - 300px);
+    padding: 1.25rem;
+    background-color: #1c1c1c;
+    
+}
+
+.employee-sec {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.header3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.header4 {
+    font-size: 1rem;
+    font-weight: 200;
+    color: #c3c3c3;
+}
+
+.add-employee {
+    width: 100%;
+    background-color: #009344;
+    border-radius: 4px;
+    padding: 10px 30px;
+    color: #ffffff;
+}
+
+.add-employee::before {
+    content: url(../public/plus-solid.svg);
+    padding-right: 10px;
+}
+.add-employee:hover {
+    background-color: #006112;
+    transition-duration: 200ms;
+}
+
+.search-employees {
+    width: 100%;
+    padding: 10px 50px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, .2);
+    background-image: url(../public/magnifying-glass-solid.svg);
+    background-repeat: no-repeat;
+    background-position: center left 20px;
+    color: #BBBBBB;
+    font-weight: 400;
+    font-size: .9rem;
+}
+
+.search-employees::before {
+    background: url(../public/magnifying-glass-solid.svg);
+}
+
+.search-employees:focus-visible {
+    outline: none;
+    border: 2px solid #009344;
+}
+
+.employee-list {
+    height: auto;
+    margin-top: 10px;
+    padding: 30px 20px;
+    background-color: #111111;
+    border: 2px solid #4D4D4D;
+    border-radius: 4px;
+}
+
+.results {
+    color: #ffffff;
+    font-size: .9rem;
+    font-weight: 500;
+}
+
+.employee-items {
+    margin-top: .5rem;
+    padding: 1.25rem .25rem;
+}
+
+.emp-photo {
+    width: 60px;
+    height: 60px;
+    margin-right: 1.5rem;
+    border-radius: 6px;
+}
+
+.emp-name {
+    color: #1EB162;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.delete {
+    display: flex;
+    width: auto;
+    align-items: center;
+    margin-left: auto;
+    padding: 15px 20px;
+    background-color: #242424;
+    border-radius: 5px;
+}
+
+.delete:hover::after {
+    content: "Delete";
+    color: #FF4346;
+    font-size: .9rem;
+    padding-left: 10px;
+}
+
+footer {
+    padding: 40px 20px;
+    background-color: #1c1c1c;
+}
+
+footer .header4 {
+    text-align: center;
+}
