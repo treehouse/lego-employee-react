@@ -24,7 +24,7 @@ const User = (props) => {
         }}
         className="delete"
       >
-        <img className="" src="../public/trash-can-solid.svg" alt="Delete employee"/>
+        <img className="" src="trash-can-solid.svg" alt="Delete employee"/>
       </button>
     </li>
   );
