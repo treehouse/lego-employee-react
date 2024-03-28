@@ -1,3 +1,5 @@
+import './styles.css';
+
 const User = (props) => {
   const { isVisible, users, setUsers, image, name, location, id } = props;
 
@@ -9,20 +11,20 @@ const User = (props) => {
     <li
       className={`${
         !isVisible ? "hidden" : "flex"
-      } place-items-center mb-3 last-of-type:mb-0`}
+      } place-items-center mb-5 last-of-type:mb-0`}
     >
-      <img className="size-[60px] mr-4 rounded-full" src={image} />
+      <img className="emp-photo" src={image} />
       <div>
-        <p>{name}</p>
-        <p className="text-slate-400 text-sm">{location}</p>
+        <p className="emp-name">{name}</p>
+        <p className="header4">{location}</p>
       </div>
       <button
         onClick={() => {
           deleteUser(id);
         }}
-        className="ml-auto bg-[#ed4b46] px-3 py-2 rounded-md hover:bg-[#cd3737] duration-200"
+        className="delete"
       >
-        Delete
+        <img className="" src="trash-can-solid.svg" alt="Delete employee"/>
       </button>
     </li>
   );

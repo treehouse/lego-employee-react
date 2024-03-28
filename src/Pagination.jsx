@@ -7,7 +7,7 @@
  * @returns {JSX.Element} - a button that updates the startIndex and activePage
  */
 const Pagination = ({ pageNum, updateStartIndex, isActive, updateActivePage }) => {
-  const active = isActive ? 'bg-[#166db4]' : 'bg-[#2b8fe1] hover:scale-75';
+  const active = isActive ? 'bg-[#009344] text-white' : 'bg-[#757575] text-black hover:scale-75';
   return (
     <button
       onClick={() => {
